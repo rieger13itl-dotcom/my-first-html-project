@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BMX Cruisers</title>
+  <style>
+
+  #gallery div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+#gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);   
+  }
+
+
+
+  #video a {
+  color: teal;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+#video a:hover {
+  color: orange;
+  text-shadow: 0px 0px 5px rgba(255, 165, 0, 0.7);
+}
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    header, footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: teal;
+      border: 1px solid teal;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    #benefits ul {
+      list-style-type: square;
+      margin-left: 20px;
+    }
+
+    blockquote {
+      font-style: italic;
+      margin: 20px;
+      padding: 10px;
+      background-color: #f4f4f4;
+      border-left: 5px solid #ccc;
+    }
+
+    .important {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Benefits of Bike Riding</h1>
+  </header>
+
+  <main>
+    <section id="introduction">
+      <h2>Introduction to Long Distance Biking</h2>
+      <p>Long distance cycling has always been about endurance, freedom, and the thrill of the open road. Traditionally, road bikes and touring frames dominate the conversation—but BMX bikes bring a fresh, exciting twist to the journey...</p>
+    </section>
+
+    <section id="benefits">
+      <h2>Benefits of BMX Cruisers</h2>
+      <p>Long-distance cycling is often seen as the domain of road or touring bikes, but BMX bikes bring a unique advantage to the journey. Their compact frames and durable construction make them resilient against rough terrain...</p>
+    </section>
+
+    <div class="my-div">
+      <h2>Additional Information</h2>
+      <p>Content coming soon...</p>
+    </div>
+
+    <section id="quotes">
+      <h2>Inspirational Quote</h2>
+      <blockquote>"Adventure doesn’t have to follow the rules." – BMX Rider</blockquote>
+    </section>
+
+    <section id="video">
+      <h2>Watch BMX Cruisers in Action</h2>
+      <p>
+        <a href="https://www.youtube.com/watch?v=BjdXunCLms0" target="_blank">
+          Check out this BMX Cruisers video
+        </a>
+      </p>
+    </section>
+
+    <section id="gallery">
+  <h2>BMX Cruiser Gallery</h2>
+  <div>
+    <img src="images css/bmx beach.webp" alt="BMX Cruiser doing a wheelie at the beach with a pink bmx." width="300">
+    <img src="images css/bmx blue.jpg" alt="BMX Cruiser blue big ripper with red trim and chrome handlebars," width="300">
+    <img src="images css/bmx nyc.jpg" alt="BMX rider performing wheelie in NYC on 26-in Big Ripper.  3" width="300">
+    <img src="images css/bmx rain.jpeg" alt="BMX Cruiser rainbow colors width="300">
+    <img src="images css/bmx shop.jpg" alt="BMX bicycle shop, a man repairs a 26-inch bmx crusier on a bike stand  width="300">
+  </div>
+</section>
+  </main>
+
+  <footer>
+    <h2>Footer</h2>
+    <p>&copy; 2023 Ruger</p>
+  </footer>
+</body>
+</html>
