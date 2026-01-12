@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicious Eats Restaurant</title>
+
+    <style>
+        /* GLOBAL */
+        body {
+            background-color: #f9f6ee;
+            font-family: Helvetica, Arial, sans-serif;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            color: #1b2477;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* DARK MODE */
+        body.dark-mode {
+            background-color: #1b1b1b;
+            color: #e6e6e6;
+        }
+
+        body.dark-mode .text-block,
+        body.dark-mode .special-card,
+        body.dark-mode .event-card {
+            background-color: #2a2a2a;
+            color: #e6e6e6;
+        }
+
+        body.dark-mode nav {
+            background-color: #111;
+        }
+
+        body.dark-mode nav a {
+            color: #e6e6e6;
+        }
+
+        /* DARK MODE BUTTON */
+        .dark-toggle {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            background-color: #2E9C78;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 2000;
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-toggle:hover {
+            background-color: #247a60;
+        }
+
+        /* SKIP LINK */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 10px;
+            background-color: #1b2477;
+            color: #ffffff;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            z-index: 1000;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 10px;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        header img {
+            max-width: 195px;
+            width: 100%;
+            height: auto;
+            margin-top: 15px;
+        }
+
+        h1, h2 {
+            color: #2E9C78;
+        }
+
+        body.dark-mode h1,
+        body.dark-mode h2 {
+            color: #4cd3a8;
+        }
+
+        /* NAVIGATION */
+        nav {
+            text-align: center;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            background-color: #f9f6ee;
+            z-index: 1500;
+        }
+
+        nav a {
+            color: #1b2477;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 16px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            text-decoration: underline;
+        }
+
+        /* MAIN FLEX LAYOUT */
+        main {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 25px;
+            padding: 20px;
+        }
+
+        main section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f9f6ee;
+        }
+
+        /* TEXT BLOCKS */
+        .text-block {
+            background-color: #f9f6ee;
+            color: #1b2477;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            flex-grow: 1;
+        }
+
+        /* UNIFIED IMAGE SIZING */
+        .content-image,
+        .carousel img,
+        .special-card img,
+        .event-card img {
+            width: 200px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-image:hover,
+        .carousel img:hover,
+        .special-card img:hover,
+        .event-card img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+        }
+
+        /* COMPACT SPECIALS + EVENTS */
+        #specials, #events {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 10px 20px;
+        }
+
+        .specials-grid, .events-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .special-card, .event-card {
+            background-color: #f9f6ee;
+            padding: 12px;
+            border-radius: 8px;
+            width: 32%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .special-card h3, .event-card h3 {
+            margin: 5px 0;
+            font-size: 1.1rem;
+        }
+
+        .special-card p, .event-card p {
+            font-size: 0.9rem;
+            text-align: center;
+            margin: 0;
+        }
+
+        /* MAP SECTION */
+        #map-section {
+            width: 100%;
+            padding: 20px;
+            background-color: #f9f6ee;
+            margin-top: 20px;
+        }
+
+        #map-container {
+            position: sticky;
+            top: 80px;
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* GALLERY BAR */
+        .gallery-bar {
+            width: 100%;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #f9f6ee;
+        }
+
+        /* HORIZONTAL SCROLL GALLERY */
+        .carousel {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: #2E9C78 #ddd;
+            scroll-behavior: smooth;
+        }
+
+        .carousel img {
+            flex-shrink: 0;
+            scroll-snap-align: center;
+        }
+
+        /* SOCIAL LINKS */
+        #social-links {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #social-links a {
+            margin: 0 10px;
+            font-size: 32px;
+            color: #2E9C78;
+            text-decoration: none;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f9f6ee;
+            color: #1b2477;
+            margin-top: 20px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 850px) {
+            main {
+                flex-direction: column;
+            }
+
+            .specials-grid, .events-grid {
+                flex-direction: column;
+            }
+
+            .special-card, .event-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- DARK MODE BUTTON -->
+    <button class="dark-toggle" onclick="document.body.classList.toggle('dark-mode')">
+        Toggle Dark Mode
+    </button>
+
+    <!-- SKIP TO CONTENT LINK -->
+    <a href="#main-content" class="skip-link">Skip to Content</a>
+
+    <header>
+        <h1>Welcome to Delicious Eats</h1>
+        <img src="images css/spatula.jpg"
+             alt="Chef using a spatula to cook fresh pancakes with fruit and maple syrup">
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <main id="main-content">
+
+        <!-- ABOUT COLUMN -->
+        <section id="about">
+            <h2>About Us</h2>
+
+            <p class="text-block">
+                A Queen Anne neighborhood fixture since 1962, Delicious Eats Diner serves classic American comfort food with a modern twist.
+            </p>
+
+            <p class="text-block">
+                Under Chef Kai's leadership, we craft beloved classics using locally sourced, seasonal ingredients from our Pacific Northwest neighbors.
+            </p>
+
+            <p class="text-block">
+                More than just a restaurant, we're a community gathering place where good food meets warm hospitality.
+            </p>
+
+            <img src="images css/Mille.jpg" alt="Mille foglie vanilla cake" class="content-image">
+        </section>
+
+        <!-- HOURS COLUMN -->
+        <section id="hours">
+            <h2>Our Hours</h2>
+
+            <p class="text-block">
+                Monday - Friday: 9am - 9pm<br>
+                Saturday - Sunday: 10am - 10pm
+            </p>
+
+            <p class="text-block">
+                We invite you to become part of our story.
+            </p>
+
+            <img src="images css/Rshrimp.jpg"
+                 alt="Shrimp scampi cooked with olive oil, garlic, and herbs"
+                 class="content-image">
+        </section>
+
+    </main>
+
+    <!-- CHEF'S SPECIALS -->
+    <section id="specials">
+        <h2>Chef's Specials</h2>
+
+        <div class="specials-grid">
+            <div class="special-card">
+                <img src="images css/creme.jpg" alt="Lavender crème brûlée">
+                <h3>Lavender Crème Brûlée</h3>
+                <p>A floral twist on a classic dessert with caramelized sugar crust.</p>
+            </div>
+
+            <div class="special-card">
+                <img src="images css/bltsang.webp" alt="BLT with avocado">
+                <h3>Avocado BLT Supreme</h3>
+                <p>Thick-cut bacon, heirloom tomatoes, and creamy avocado on toasted sourdough.</p>
+            </div>
+
+            <div class="special-card">
+                <img src="images css/crepe.jpg" alt="Nutella crepe">
+                <h3>Nutella Berry Crepe</h3>
+                <p>Fresh berries folded into warm Nutella-filled crepes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENTS SECTION -->
+    <section id="events">
+        <h2>Upcoming Events</h2>
+
+        <div class="events-grid">
+            <div class="event-card">
+                <img src="images css/latteart.webp" alt="Coffee art">
+                <h3>Latte Art Workshop</h3>
+                <p>Learn the basics of latte art with our in-house barista.</p>
+            </div>
+
+            <div class="event-card">
+                <img src="images css/raspberry.webp" alt="Dessert night">
+                <h3>Dessert Tasting Night</h3>
+                <p>A curated tasting menu of our most popular sweets.</p>
+            </div>
+
+            <div class="event-card">
+                <img src="images css/Mille.jpg" alt="Cake decorating">
+                <h3>Cake Decorating Class</h3>
+                <p>Hands-on workshop with Chef Kai. All skill levels welcome.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAP SECTION -->
+    <section id="map-section">
+        <h2>Find Us</h2>
+        <div id="map-container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3021.829702051498!2d-73.996864!3d40.730610!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDQzJzUwLjIiTiA3M8KwNTknNDguNyJX!5e0!3m2!1sen!2sus!4v1700000000000"
+                allowfullscreen=""
+                loading="lazy">
+            </iframe>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="gallery-bar">
+        <h2>Gallery</h2>
+
+        <div class="carousel">
+            <img src="images css/latteart.webp" alt="Latte art swirl">
+            <img src="images css/raspberry.webp" alt="Raspberry tart dessert">
+            <img src="images css/creme.jpg" alt="Crème brûlée with lavender">
+            <img src="images css/bltsang.webp" alt="BLT sandwich with avocado">
+            <img src="images css/crepe.jpg" alt="Nutella crepe with strawberries">
+            <img src="images css/BLT.jpg" alt="Loaded BLT sandwich with avocado and cheese">
+        </div>
+    </section>
+
+    <!-- SOCIAL LINKS -->
+    <section id="social-links">
+        <h2>Connect With Us</h2>
+        <div>
+            <a href="#">&#x1F4F7;</a> <!-- Camera -->
+            <a href="#">&#x1F4F1;</a> <!-- Mobile -->
+            <a href="#">&#x1F4E7;</a> <!-- Email -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Delicious Eats</p>
+    </footer>
+
+    <!-- AUTO-SCROLL GALLERY -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.querySelector('.carousel');
+            if (!carousel) return;
+
+            let isPaused = false;
+            let scrollSpeed = 0.4;
+
+            carousel.addEventListener('mouseenter', () => isPaused = true);
+            carousel.addEventListener('mouseleave', () => isPaused = false);
+
+            function animateScroll() {
+                if (!isPaused) {
+                    carousel.scrollLeft += scrollSpeed;
+                    if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 1) {
+                        carousel.scrollLeft = 0;
+                    }
+                }
+                requestAnimationFrame(animateScroll);
+            }
+
+            requestAnimationFrame(animateScroll);
+        });
+    </script>
+
+</body>
+</html>
